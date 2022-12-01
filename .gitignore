@@ -1,0 +1,9 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+.fake
+.ionide
+.idea/
+.DS_Store
