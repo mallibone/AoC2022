@@ -1,18 +1,4 @@
-#time
-#r "nuget: FSharp.Collections.ParallelSeq, 1.2.0"
-open System.IO
-open System
-open System.Collections.Generic
-open FSharp.Collections.ParallelSeq
-open System.Collections.Concurrent
-
-let getTestInput day =
-    let filename day = Path.Combine(__SOURCE_DIRECTORY__, $"Input/TestDay{day}.txt")
-    File.ReadAllLines(filename day)
-
-let getInput day =
-    let filename day = Path.Combine(__SOURCE_DIRECTORY__, $"Input/Day{day}.txt")
-    File.ReadAllLines(filename day)
+module Day02
 
 type Play =
 | Rock
@@ -34,9 +20,6 @@ let splitPlays (game:string) =
     let plays = game.Split(" ") |> Array.map toPlay
     (plays[0], plays[1])
 
-// X means you need to lose, 
-// Y means you need to end the round in a draw, and 
-// Z means you need to win.
 let splitPlaysPart2 (game:string) =
     let plays = game.Split(" ") 
     match plays[1] with
@@ -74,16 +57,32 @@ let calculatePlay p2 =
     | Scissor -> 3
     | _ -> 0
 
+let part1 input =
+    input
+    |> Seq.map splitPlays
+    |> Seq.sumBy (fun (p1,p2) -> (calculateScore p1 p2) + (calculatePlay p2))
+    
+let part2 input =
+    input
+    |> Seq.map splitPlaysPart2
+    |> Seq.sumBy (fun (p1,p2) -> (calculateScore p1 p2) + (calculatePlay p2))
+    
+let executeDay (testInput:string[]) (input:string[]) =
+    // part 1
+    testInput
+    |> part1
+    |> printfn "Part 1 Test: %d"
 
-// part 1
-getInput 2
-// getTestInput 2
-|> Seq.map splitPlays
-|> Seq.sumBy (fun (p1,p2) -> (calculateScore p1 p2) + (calculatePlay p2))
+    input
+    |> part1
+    |> printfn "Part 1: %d"
 
+    // part 2
+    testInput
+    |> part2
+    |> printfn "Part 2 Test: %d"
 
-// part 2
-getInput 2
-// getTestInput 2
-|> Seq.map splitPlaysPart2
-|> Seq.sumBy (fun (p1,p2) -> (calculateScore p1 p2) + (calculatePlay p2))
+    input
+    |> part2
+    |> printfn "Part 2: %d"
+

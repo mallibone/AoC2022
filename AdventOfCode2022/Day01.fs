@@ -41,3 +41,4 @@ let executeDay (testInput:string[]) (input:string[]) =
     input
     |> part2
     |> printfn "Part 2: %d"
+    

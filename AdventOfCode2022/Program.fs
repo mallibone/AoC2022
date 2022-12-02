@@ -20,7 +20,7 @@ let printDay day dayFunc =
     printfn $"Duration {sw.ElapsedMilliseconds} ms"
     printfn $"***************"
 
-[(Day01.executeDay)]
+[Day01.executeDay; Day02.executeDay]
 //     (Day7.executeDay); (Day8.executeDay); (Day9.executeDay); (Day10.executeDay); (Day11.executeDay); (Day12.executeDay);
 //     (Day13.executeDay); (Day14.executeDay); (Day15.executeDay); (Day16.executeDay); (Day17.executeDay); (Day18.executeDay);
 //     (Day19.executeDay); (Day20.executeDay); (Day21.executeDay)]
