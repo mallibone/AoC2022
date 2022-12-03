@@ -1,10 +1,10 @@
 module Day04
 
 let part1 input =
-    input
+    0
 
 let part2 input =
-    input
+    0
     
 let executeDay (testInput:string[]) (input:string[]) =
     // part 1
