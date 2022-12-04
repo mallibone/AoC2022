@@ -15,8 +15,8 @@ let getInput day =
     File.ReadAllLines(filename day)
 
 // part 1
-// getInput 4
-getTestInput 4
+getInput 4
+// getTestInput 4
 
 // part 2
 // getInput 4
