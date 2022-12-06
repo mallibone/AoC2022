@@ -2,19 +2,21 @@ module Day06
 
 open System
 
-let hasNoDuplicates (w:string[]) = w.Length = (w |> Array.sort |> Array.distinct).Length
+let findIndex windowSize (input:string) = 
+    input.ToCharArray() 
+    |> Seq.windowed windowSize
+    |> Seq.findIndex (fun r -> r |> Set.ofArray |> Set.count = windowSize) 
+    |> (+) windowSize
 
 let part1 (input:string[]) =
     input 
-    |> Seq.map (fun s -> s.ToCharArray() |> Seq.map (fun c -> c.ToString()) |> Seq.windowed 4)
-    |> Seq.map (fun row -> ((row |> Seq.findIndex hasNoDuplicates) + 4).ToString())
+    |> Seq.map (findIndex 4)
     |> (fun r -> String.Join(",", r))
 
 
 let part2 (input:string[]) =
     input 
-    |> Seq.map (fun s -> s.ToCharArray() |> Seq.map (fun c -> c.ToString()) |> Seq.windowed 14)
-    |> Seq.map (fun row -> ((row |> Seq.findIndex hasNoDuplicates) + 14).ToString())
+    |> Seq.map (findIndex 14)
     |> (fun r -> String.Join(",", r))
     
 let executeDay (testInput:string[]) (input:string[]) =
