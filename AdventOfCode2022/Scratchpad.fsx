@@ -1,6 +1,7 @@
 #time
 #r "nuget: FSharp.Collections.ParallelSeq, 1.2.0"
 open System.IO
+open System.Text.RegularExpressions;
 open System
 open System.Collections.Generic
 open FSharp.Collections.ParallelSeq
@@ -14,10 +15,11 @@ let getInput day =
     let filename day = Path.Combine(__SOURCE_DIRECTORY__, $"Input/Day{day}.txt")
     File.ReadAllLines(filename day)
 
+
 // part 1
-getInput 4
-// getTestInput 4
+getInput 6
+// getTestInput 6
 
 // part 2
-// getInput 4
-// getTestInput 4
+// getInput 6
+// getTestInput 6
