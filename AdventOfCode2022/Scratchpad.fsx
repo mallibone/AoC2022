@@ -17,9 +17,10 @@ let getInput day =
 
 
 // part 1
-getInput 6
-// getTestInput 6
+// getInput 7
+// getTestInput 7
+
 
 // part 2
-// getInput 6
-// getTestInput 6
+// getInput 7
+// getTestInput 7
