@@ -13,6 +13,7 @@
         <Compile Include="Day05.fs" />
         <Compile Include="Day06.fs" />
         <Compile Include="Day07.fs" />
+        <Compile Include="Day08.fs" />
         <Compile Include="Program.fs" />
         <None Include="Scratchpad.fsx" />
         <Content Include="Input\Day1.txt" />
