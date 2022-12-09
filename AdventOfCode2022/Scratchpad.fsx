@@ -3,6 +3,7 @@
 open System.IO
 open System.Text.RegularExpressions;
 open System
+open System.Linq
 open System.Collections.Generic
 open FSharp.Collections.ParallelSeq
 open System.Collections.Concurrent
@@ -15,12 +16,10 @@ let getInput day =
     let filename day = Path.Combine(__SOURCE_DIRECTORY__, $"Input/Day{day}.txt")
     File.ReadAllLines(filename day)
 
-
 // part 1
-getInput 9
-// getTestInput 9
-
+// getInput 10
+getTestInput 10
 
 // part 2
-getInput 9
-// getTestInput 9
+// getInput 10
+// getTestInput 10
