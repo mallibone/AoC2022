@@ -1,4 +1,4 @@
-module Day0X
+module DayX0
 
 let part1 input =
     input 
