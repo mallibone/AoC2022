@@ -13,7 +13,7 @@ let parseStacks (inputStacks: seq<string>) =
 
     [for i in 0 .. (stackCount - 1) do
         [for inputRow in (revInputStacks |> Seq.skip 1) do
-          yield ((inputRow.ToCharArray())[(1 + 4*i)]).ToString()]]
+            yield ((inputRow.ToCharArray())[(1 + 4*i)]).ToString()]]
     |> Seq.map (fun r -> r |> Seq.filter (fun e -> e <> " ") |> Seq.rev |> Seq.toList)
     |> Seq.toList
 
@@ -80,22 +80,21 @@ let part2 input =
     |> makeMovesPart2
     |> takeHeads
     
-let executeDay (testInput:string[]) (input:string[]) =
+let executeDay day =
     // part 1
-    testInput
+    getTestInputLines day
     |> part1
     |> printfn "Part 1 Test: %s"
 
-    input
+    getInputLines day
     |> part1
     |> printfn "Part 1: %s"
 
     // part 2
-    testInput
+    getTestInputLines day
     |> part2
     |> printfn "Part 2 Test: %s"
 
-    input
+    getInputLines day
     |> part2
     |> printfn "Part 2: %s"
-

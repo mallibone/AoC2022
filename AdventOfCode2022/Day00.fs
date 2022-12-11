@@ -1,4 +1,6 @@
-module DayX0
+module Day1X
+
+open Common
 
 let part1 input =
     input 
@@ -8,22 +10,21 @@ let part2 input =
     input 
     |> Array.length
 
-let executeDay (testInput:string[]) (input:string[]) =
+let executeDay day =
     // part 1
-    testInput
+    getTestInputAllText day
     |> part1
     |> printfn "Part 1 Test: %d"
 
-    input
+    getInputAllText day
     |> part1
     |> printfn "Part 1: %d"
 
     // part 2
-    testInput
+    getTestInputAllText day
     |> part2
     |> printfn "Part 2 Test: %d"
 
-    input
+    getInputAllText day
     |> part2
     |> printfn "Part 2: %d"
-

@@ -19,22 +19,21 @@ let part2 (input:string[]) =
     |> Seq.map (findIndex 14)
     |> (fun r -> String.Join(",", r))
     
-let executeDay (testInput:string[]) (input:string[]) =
+let executeDay day =
     // part 1
-    testInput
+    getTestInputLines day
     |> part1
     |> printfn "Part 1 Test: %s"
 
-    input
+    getInputLines day
     |> part1
     |> printfn "Part 1: %s"
 
     // part 2
-    testInput
+    getTestInputLines day
     |> part2
     |> printfn "Part 2 Test: %s"
 
-    input
+    getInputLines day
     |> part2
     |> printfn "Part 2: %s"
-

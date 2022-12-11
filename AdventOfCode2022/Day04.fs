@@ -32,22 +32,21 @@ let part2 input =
     |> Seq.filter hasPartialOverlap
     |> Seq.length
     
-let executeDay (testInput:string[]) (input:string[]) =
+let executeDay day =
     // part 1
-    testInput
+    getTestInputLines day
     |> part1
     |> printfn "Part 1 Test: %d"
 
-    input
+    getInputLines day
     |> part1
     |> printfn "Part 1: %d"
 
     // part 2
-    testInput
+    getTestInputLines day
     |> part2
     |> printfn "Part 2 Test: %d"
 
-    input
+    getInputLines day
     |> part2
     |> printfn "Part 2: %d"
-
