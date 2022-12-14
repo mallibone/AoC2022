@@ -20,38 +20,53 @@ let getInput (day:int) =
 
 type PaketElement =
     | Number of int
-    | SubPaket of list<PaketElement>
+    | Paket of list<PaketElement>
 
-let rec parsePaket paketInput =
-    match paketInput with
-    | "[]" -> []
-    | _ ->
-        // remove braces
-        let innerPaketInput = paketInput.Substring(1,paketInput.Length-2)
-        let innerPaketElements =
-            if innerPaketInput.Contains("[") then
-                // this is wrong -> need to take first [ then step into subparser, exit subparser if same level reaches ]
-                let innerSubPaketInput = paketInput.Substring(innerPaketInput.IndexOf("["),innerPaketInput.LastIndexOf("]"))
-                printfn "%s" innerSubPaketInput
-                innerPaketInput.Replace(innerSubPaketInput, "{gnabber}")
-            else
-                innerPaketInput
+let parsePaket (paketInput:string) =
+    let rec parsePaketElements paketInput (parsedElements:list<PaketElement>) =
+        printfn "PI %A PE %A" paketInput parsedElements
+        match paketInput with
+        | [] -> [], parsedElements
+        | headElement::tailElements ->
+            printfn "HE %s" headElement
+            if headElement.Contains("[") then
+                printfn "["
+                let newTail, subPaket = (parsePaketElements (headElement.Substring(1,headElement.Length-1)::tailElements) [])
+                let newParsedElements = parsedElements@subPaket
 
-        [for paketElement in innerPaketElements.Split(",") do 
-            if paketElement = "{gnabber}" then
-                yield SubPaket (parsePaket paketElement)
+                parsePaketElements newTail newParsedElements
+            elif headElement.Contains("]") then
+                // Wrap up Sub-Paket
+                printfn "]h %s" (headElement.Substring(0,headElement.Length - 1))
+                let indx = headElement.IndexOf("]")
+                let newParsedElements = 
+                    if indx <> 0 then 
+                        let newElement = (headElement.Substring(0, indx)) |> int |> Number
+                        parsedElements@[newElement] 
+                    else
+                        parsedElements
+
+                printfn "t %A" tailElements
+                let newTail = if indx < (headElement.Length - 1)  then headElement.Substring(indx+1)::tailElements else tailElements
+                printfn "nt %A" newTail
+                newTail, [Paket newParsedElements]
             else
-                yield Number (int paketElement)]
+                printfn "#"
+                let newParsedElements = if not (String.IsNullOrEmpty(headElement)) then parsedElements@[Number (int headElement)] else parsedElements@[Paket []]
+                parsePaketElements tailElements newParsedElements
+
+    parsePaketElements (paketInput.Substring(1,paketInput.Length-2).Split(",") |> Array.toList) []
 
 let parseInput (packetInput:string) =
     packetInput.Split(System.Environment.NewLine + "" + System.Environment.NewLine)
-    |> Array.map (fun pairInput -> pairInput.Split(System.Environment.NewLine) |> Array.map parsePaket)
+    |> Array.map (fun pairInput -> pairInput.Split(System.Environment.NewLine)  |> Array.map parsePaket)
 
 // part 1
 // let gna = 
 // getInput 13
 getTestInput 13
 |> parseInput
+// let foo = gna[0][0]
 
 // part 2
 // getInput 13
