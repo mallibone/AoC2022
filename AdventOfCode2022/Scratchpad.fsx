@@ -18,19 +18,22 @@ let getInput (day:int) =
     File.ReadAllLines(filename)
     // File.ReadAllText(filename)
 
-    // add sand
-    // drop to lowest free point -> check point x-1,y-1 -> check point x+1,y-1 -> if point changed repeat
-    // check if sand is in first or last column -> done
-    // if not repeat
-    // map
+type SensorInfo = {SensorX: int; SensorY: int; BeaconX: int; BeaconY: int}
+let parseInput (sensorBeaconInput:string) =
+    let sensorInput, beaconInput = sensorBeaconInput.Split(": ") |> fun sbi -> sbi[0],sbi[1]
+    let sensorX, sensorY = sensorInput.Replace("Sensor at ", "").Split(", ") |> fun si -> int (si[0].Replace("x=", "")), int (si[1].Replace("y=", ""))
+    let beaconX, beaconY = beaconInput.Replace("closest beacon is at ", "").Split(", ") |> fun si -> int (si[0].Replace("x=", "")), int (si[1].Replace("y=", ""))
 
-// make the simulation
+    {SensorX = sensorX;SensorY = sensorY; BeaconX = beaconX; BeaconY = beaconY}
+// parse input
+// enable range marker for a line
 
 // part 1
-// getInput 14
-getTestInput 14
+// getInput 15
+getTestInput 15
+|> Array.map parseInput
 
     // printfn "minx: %d maxx: %d maxy: %d" min
 // part 2
-getInput 14
-// getTestInput 14
+// getInput 15
+// getTestInput 15
