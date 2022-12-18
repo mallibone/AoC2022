@@ -18,22 +18,13 @@ let getInput (day:int) =
     File.ReadAllLines(filename)
     // File.ReadAllText(filename)
 
-type SensorInfo = {SensorX: int; SensorY: int; BeaconX: int; BeaconY: int}
-let parseInput (sensorBeaconInput:string) =
-    let sensorInput, beaconInput = sensorBeaconInput.Split(": ") |> fun sbi -> sbi[0],sbi[1]
-    let sensorX, sensorY = sensorInput.Replace("Sensor at ", "").Split(", ") |> fun si -> int (si[0].Replace("x=", "")), int (si[1].Replace("y=", ""))
-    let beaconX, beaconY = beaconInput.Replace("closest beacon is at ", "").Split(", ") |> fun si -> int (si[0].Replace("x=", "")), int (si[1].Replace("y=", ""))
-
-    {SensorX = sensorX;SensorY = sensorY; BeaconX = beaconX; BeaconY = beaconY}
-// parse input
-// enable range marker for a line
 
 // part 1
-// getInput 15
-getTestInput 15
-|> Array.map parseInput
+getInput 15
+// getTestInput 15
 
-    // printfn "minx: %d maxx: %d maxy: %d" min
 // part 2
-// getInput 15
+let maxcoord = 4_000_000
+getInput 15
+// let maxcoord = 20
 // getTestInput 15

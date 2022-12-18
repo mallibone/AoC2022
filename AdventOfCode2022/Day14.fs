@@ -148,7 +148,7 @@ let part2 input =
 
 let executeDay day =
     // part 1
-    getInputLines day
+    getTestInputLines day
     |> part1
     |> printfn "Part 1 Test: %d"
 
@@ -157,7 +157,7 @@ let executeDay day =
     |> printfn "Part 1: %d"
 
     // part 2
-    getInputLines day
+    getTestInputLines day
     |> part2
     |> printfn "Part 2 Test: %d"
 
