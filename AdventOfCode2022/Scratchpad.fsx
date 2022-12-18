@@ -20,11 +20,9 @@ let getInput (day:int) =
 
 
 // part 1
-getInput 15
-// getTestInput 15
+getInput 16
+// getTestInput 16
 
 // part 2
-let maxcoord = 4_000_000
-getInput 15
-// let maxcoord = 20
-// getTestInput 15
+getInput 16
+// getTestInput 16
