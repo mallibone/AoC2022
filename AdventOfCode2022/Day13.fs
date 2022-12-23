@@ -9,19 +9,16 @@ type PacketElement =
 
 let parsePacket (packetInput:string) =
     let rec parsePacketElements packetInput (parsedElements:list<PacketElement>) =
-        // printfn "PI %A PE %A" packetInput parsedElements
         match packetInput with
         | [] -> [], parsedElements
         | (headElement:string)::tailElements ->
             if headElement.Contains("[") then
-                // printfn "["
                 let newTail, subPacket = (parsePacketElements (headElement.Substring(1,headElement.Length-1)::tailElements) [])
                 let newParsedElements = parsedElements@subPacket
 
                 parsePacketElements newTail newParsedElements
             elif headElement.Contains("]") then
                 // Wrap up Sub-Packet
-                // printfn "]h %s" (headElement.Substring(0,headElement.Length - 1))
                 let indx = headElement.IndexOf("]")
                 let newParsedElements = 
                     if indx <> 0 then 
@@ -53,10 +50,8 @@ let rec findFirstNumber packet =
             findFirstNumber (p |> List.head)
     | Number n -> n
 
-// let packetFilter (packets:list<list<PacketElement>*string>) =
 let packetFilter firstPacket secondPacket =
     let rec recPacketFilter (firstPacket:list<PacketElement>) (secondPacket:list<PacketElement>) =
-        // printfn "Filtering %A %A" firstPacket secondPacket
         match firstPacket, secondPacket with
         | Number n1::_, Number n2::_ when n1 < n2 -> Some true
         | Number n1::_, Number n2::_ when n1 > n2 -> Some false
@@ -105,9 +100,7 @@ let part2 input =
     |> List.append [seperators]
     |> List.collect id
     |> List.sortWith sortPackets
-    // |> List.rev
     |> List.indexed
-    // |> List.map (fun (x,(_,z)) -> x,z)
     |> List.filter(fun l -> seperators |> Seq.contains (snd l))
     |> List.map (fst >> ((+) 1))
     |> List.reduce (*) 
