@@ -179,11 +179,12 @@ let findRepeatPoint jets abortAfter =
 // getTestInput 17
 // |> fun moveInput -> moveInput.ToCharArray() |> Array.map string
 
-let parsedJets = jets (getTestInput 17)
+// let parsedJets = jets (getTestInput 17)
+let parsedJets = jets (getInput 17)
 findRepeatPoint parsedJets 100_000
 
 // simulate (findRepeatPoint 50_000)
-simulate parsedJets 3068
+simulate parsedJets 2022
 // |> printChamber
 |> fun c -> c.RockCoords |> Seq.maxBy snd |> snd
 |> (+) 1
