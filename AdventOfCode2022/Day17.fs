@@ -125,7 +125,6 @@ let findRepeatPoint jets abortAfter =
     let chamber = initChamber
     let iter = 0
 
-    // let rec repRound chamber iter rockIndx (detectedSets:list<(int*int*Set<int*int>)*int>) = 
     let rec repRound chamber iter rockIndx (detectedSets:list<(int*int*Set<int*int>*int)*int>) = 
         let normalizedRockIndx = (rockIndx % (rockShapesLength))
         let normalizedJetIndx = (iter % (jets |> Seq.length))
@@ -135,17 +134,12 @@ let findRepeatPoint jets abortAfter =
             let topPattern = 
                 [0 .. 6] 
                 |> Seq.map (fun i -> chamber.RockCoords |> Seq.filter(fun (x,_) -> x = i) |> Seq.maxBy snd)
-            // let lowY = chamber.RockCoords |> Seq.minBy snd |> snd
             let lowY = topPattern |> Seq.minBy snd |> snd
             let highY = topPattern |> Seq.minBy snd |> snd
-            // let topPatternNormalized = chamber.RockCoords |> Seq.map (fun (x,y) -> (x,y-lowY)) |> Set
             let topPatternNormalized = topPattern |> Seq.map (fun (x,y) -> (x,y-lowY)) |> Set
-            // let topPatternNormalized = topPattern |> Seq.map (fun (x,y) -> (x,y/2)) |> Set
 
             if highY % 2 = 0 && detectedSets |> Seq.map fst |> Seq.contains (normalizedRockIndx, normalizedJetIndx, topPatternNormalized,highY/2) then
-                printfn "%d %d %d %A" rockIndx normalizedRockIndx normalizedJetIndx topPatternNormalized
-                // let gna = detectedSets |> Seq.find (fun (ds,_) -> ds = ((normalizedRockIndx, normalizedJetIndx, topPatternNormalized,(highY/2))))
-                // let ((_,_,_,s),_) = gna
+                // printfn "%d %d %d %A" rockIndx normalizedRockIndx normalizedJetIndx topPatternNormalized
 
                 let (_,ri) = detectedSets |> Seq.find (fun (ds,_) -> ds = (normalizedRockIndx, normalizedJetIndx, topPatternNormalized,highY/2))
                 ri
@@ -175,9 +169,9 @@ let executeDay day =
     |> part1
     |> printfn "Part 1 Test: %d"
 
-    getInputAllText day
-    |> part1
-    |> printfn "Part 1: %d"
+    // getInputAllText day
+    // |> part1
+    // |> printfn "Part 1: %d"
 
     // part 2
     // getTestInputAllText day
